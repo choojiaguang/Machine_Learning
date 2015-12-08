@@ -1,0 +1,300 @@
+%%
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% This template has been modified by Philip Blakely for
+%% local distribution to students on the MPhil for Scientific
+%% Computing course run at the University of Cambridge.
+%%
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%%
+%%
+%% $Id: elsarticle-template-num.tex 4 2009-10-24 08:22:58Z rishi $
+%%
+%%
+\documentclass[final,3p,times]{elsarticle}
+% \documentclass[final,3p,times,twocolumn]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+%% The bm package lets you access bold symbols in math mode using the \boldsymbol command (useful to get bold greek letters).
+\usepackage{bm}
+%% The bbm package is contains the indicator function symbol \mathbbm{1}
+\usepackage{bbm}
+%% The amsmath package contains the split environment, letting you split equations into multiple lines.
+%% See "https://www.sharelatex.com/learn/Aligning_equations_with_amsmath " for an explanation.
+\usepackage{amsmath}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+%% The algorithm defines the algorithm floating environment and the algpseudocode package is useful for constructing Pseudo code.
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+%% Declaring \argmin and \argmax operators:
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+
+\journal{MPhil in Scientific Computing}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{Clustering: K-Means and Gaussian Mixture Models}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author{Brian Azizi}
+\author{Choo Jia Guang}
+
+\address{Cavendish Laboratory, Department of Physics, J J Thomson
+  Avenue, Cambridge. CB3 0HE}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+\section*{Clustering}
+\label{sect:Clustering}
+We have an unlabelled training set of $N$ data points, $\{\boldsymbol{x}^{(1)}, \dots , \boldsymbol{x}^{(N)} \}$. Each data has $D$ features, i.e. $\boldsymbol{x}^{(i)} \in \mathbbm{R}^D$ for each $i$. We compactly represent the training data as an $N \times D$ matrix $\boldsymbol{X}$.
+
+Our goal is to identify clusters in the data. Data points within the same cluster should be similar to each other and unlike data points in different clusters.
+
+We will discuss two clustering models: K-Means and GMM.
+Both models are usually trained using the \emph{EM-algorithm}.
+
+\section{K-Means}
+\label{sect:Kmeans}
+Kmeans stuff
+
+
+% \section{Pictures}
+% \label{sect:Pictures}
+% In this section we demonstrate the inclusion of figures. For example,
+% \ref{fig:ENO1} demonstrates ENO as used to solve a linear advection
+% of a top-hat function.
+% \begin{figure}
+% \centering
+% \includegraphics[width=3in]{ENOTest3b.png}
+% \caption{Demonstration of ENO as used to solver linear-advection of a
+%   top-hat function.}
+% \label{fig:ENO1}
+% \end{figure}
+
+\section{Gaussian Mixture Model}
+\label{sect:GMM}
+
+\subsection*{Defining the Model}
+\label{sect:GMM-def}
+In latent variable models, we model the probability density function (pdf) of the data as 
+\begin{equation}
+p(\boldsymbol{x}) = \sum_{\boldsymbol{z}} p(\boldsymbol{x}|\boldsymbol{z})p(\boldsymbol{z})
+\label{eqn:mixtures}
+\end{equation}
+The random variable $\boldsymbol{x}$ represents our data and the random variable $\boldsymbol{z}$ is a so called \emph{latent} variable, i.e. it is not observed.
+
+In mixture models, $\boldsymbol{x}$ is generated from one of $K$ possible base distributions and $\boldsymbol{z}$ tells us from which. Here, $K$ is analogous to number of clusters $K$ in K-Means,. So, to get the required behaviour, $\boldsymbol{z}$ has a categorical nature. We generally use the so-called 1-of-$K$ representation of $\boldsymbol{z}$, where 
+\begin{equation}
+\boldsymbol{z} \in \{0,1\}^K, \qquad \sum_{k=1}^K z_k = 1
+\label{eqn:1-of-K}
+\end{equation}
+For example, if $K=3$ and for a particular point $\boldsymbol{x}^{(i)}$ we have $\boldsymbol{z}^{(i)} = (0,1,0)$, then this means that $\boldsymbol{x}^{(i)}$ came from the 2nd base distribution (think: 2nd cluster).
+
+Of course, we don't know $\boldsymbol{z}$, since it is a latent variable. So we define a distribution for it: 
+\begin{equation}
+p(z_k = 1) = \pi_k
+\end{equation}
+or equivalently
+\begin{equation}
+p(\boldsymbol{z}) = \prod_{k=1}^K \pi_k^{z_k}
+\end{equation} 
+
+Equation (\ref{eqn:mixtures}) then gives:
+\begin{equation}
+\begin{split}
+p(\boldsymbol{x}) & = \sum_{\boldsymbol{z}} p(\boldsymbol{x}|\boldsymbol{z})p(\boldsymbol{z}) \\
+& = \sum_{\boldsymbol{z}} p(\boldsymbol{x}|\boldsymbol{z}) \prod_{k=1}^K \pi_k^{z_k} \\
+& = \sum_{k = 1}^K \pi_k p(\boldsymbol{x}|z_k = 1)
+\end{split}
+\end{equation}
+
+Now we have general mixture models of $K$ base distribution. In \emph{Gaussian Mixture Models}, each base distribution is a multivariate Gaussian. The $k$th base distribution has parameters $(\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$ and has pdf
+\begin{equation}
+\label{eqn:MVG}
+\mathcal{N}(\boldsymbol{x}\,|\,\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) = \frac{1}{(2\pi)^{D/2}}\frac{1}{|\boldsymbol{\Sigma}_k|^{1/2}}
+\exp{\{-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu_k})^T \boldsymbol{\Sigma}_k^{-1}(\boldsymbol{x}-\boldsymbol{\mu}_k) \}}
+\end{equation}
+
+The final Gaussian mixture model is then
+\begin{equation}
+\label{eqn:GMM}
+p(\boldsymbol{x}) = \sum_{k = 1}^K \pi_k \mathcal{N}(\boldsymbol{x}\,|\,\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)
+\end{equation}
+
+\subsection*{Training the model}
+\label{sect:GMM-train}
+To train the model, i.e. find the parameters $\boldsymbol{\mu}_k$ and $\boldsymbol{\Sigma}_k$ for $ k = 1,\dots, K$, we need a set of training data $\boldsymbol{X} \in \mathbbm{R}^{N\times D}$. We assume that the samples were idenpendently generated from our model, which allows us to write the likelihood function as
+\begin{equation}
+\label{eqn:GMM-likelihood}
+p(\boldsymbol{X}\,|\boldsymbol{\pi},\boldsymbol{\mu},\boldsymbol{\Sigma}) = \prod_{i=1}^N\sum_{k=1}^K pi_k
+ \mathcal{N}(\boldsymbol{x}^{(i)}\,|\,\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k).
+\end{equation}
+
+We maximize the (log) likelihood to get the parameters. The solution can be expressed as
+\begin{equation}
+\label{eqn:GMM-solution}
+\begin{split}
+\boldsymbol{\mu}_k & = \frac{1}{N_k}\sum_{i=1}^N \gamma(z_k^{(i)})\boldsymbol{x}^{(i)},\\
+\boldsymbol{\Sigma}_k & = \frac{1}{N_k}\sum_{i=1}^N\gamma(z_k^{(i)})(\boldsymbol{x}^{(i)} - \boldsymbol{\mu}_k)(\boldsymbol{x}^{(i)} - \boldsymbol{\mu}_k)^T,\\
+\pi_k & = \frac{N_k}{N},\\
+N_k & = \sum_{i=1}^N\gamma(z_k^{(i)}),\\
+\gamma(z_k^{(i)}) & = \frac{\pi_k\mathcal{N}(\boldsymbol{x}^{(i)}\,|\,\boldsymbol{\mu}_k,\boldsymbol{\Sigma}_k)}
+{\sum_{j=1}^K \pi_j \mathcal{N}(\boldsymbol{x}^{(i)}\,|\,\boldsymbol{\mu}_j,\boldsymbol{\Sigma}_k)}.
+\end{split}
+\end{equation}
+
+The quantity $\gamma(z_k^{(i)})$ is referred to as the \emph{responsibility} that cluster $k$ takes in explaining sample $\boldsymbol{x}^{(i)}$, while $N_k$ is the effective number of data points in cluster $k$.
+
+Note that this is not a closed-form solution since the quantities depend on each other. However, we can try to find the solution iteratively as follows:
+ First, randomly initialize the quantities $\boldsymbol{\mu}_k$, $\boldsymbol{\Sigma}_k$ and $\pi_k$. Then calculate $\gamma(z_k^{(i)})$ and $N_k$. Then calculate $\boldsymbol{\mu}_k$, $\boldsymbol{\Sigma}_k$ and $\pi_k$ and so on until convergence. This iterative scheme is known as the \emph{Expectation-Maximization algorithm} for the Gaussian mixture model. 
+
+For more information and details on the derivation, see \cite{Pilikos} \cite{Bishop}.
+
+\section*{References}
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}         ==>>  [#]
+%%   \cite[chap. 2]{key} ==>> [#, chap. 2]
+%%
+
+%% References with bibTeX database:
+
+%\bibliographystyle{elsarticle-num}
+%\bibliography{references.bib}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use elsarticle-num.bst.
+
+%% References without bibTeX database:
+
+\begin{thebibliography}{00}
+
+\bibitem{Pilikos}
+  Georgios Pilikos,
+  Unsupervised Learning,
+  Lecture Notes in Machine Learning,
+  Chapter 2,
+  2015
+
+\bibitem{Bishop}
+  Christopher Bishop,
+  Pattern Recognition and Machine Learning,
+  Chapter 9,
+  2015,
+  Springer
+\end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-num.tex'.
