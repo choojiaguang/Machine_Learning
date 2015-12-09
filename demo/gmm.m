@@ -10,7 +10,7 @@ rngsetting = rng;  % save the current rng settings for reproducability
 K = 30;
 
 % Number of clusters in GMM algorithm
-C = 2;
+C = 5;
  
 MU = zeros(K, 2);
 SIGMA = zeros(2, 2, K);
